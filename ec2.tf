@@ -3,13 +3,11 @@ resource "aws_instance" "terraform" {
     ami = "ami_id"
     instance_type = "instance_type"
     vpc_security_group_ids = [aws_security_group.allow_ssh_terraform.id]
-    tags = {
-        Name = "terraform"
-    }
+    tags = var.tags
 }
 
 resource "aws_security_group" "allow_ssh_terraform" {
-    name        = "allow_ssh"
+    name        = var.sg_name
     description = "Allow port number 22 for SSH access"
 
     # usually we allow everything in egress
